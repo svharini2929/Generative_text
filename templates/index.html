@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative Text AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">AI</div>
+            <h1>Generative Text AI</h1>
+            <p class="subtitle">Powered by GPT-2 &mdash; Enter a sentence and watch AI continue your thoughts</p>
+        </div>
+
+        <div class="input-section">
+            <label for="prompt">Your Prompt</label>
+            <textarea id="prompt" placeholder="e.g. The human brain is the most complex organ in the body..."></textarea>
+        </div>
+
+        <button id="generateBtn" onclick="generateText()">
+            <span class="btn-text">Generate Text</span>
+            <span class="btn-loader" style="display:none;">Generating...</span>
+        </button>
+
+        <div class="output-section">
+            <label>AI Generated Response</label>
+            <div id="output">Your generated paragraph will appear here...</div>
+        </div>
+
+        <div class="footer">
+            <span>Built with Flask + Hugging Face Transformers</span>
+        </div>
+    </div>
+</div>
+
+<script>
+async function generateText() {
+    const prompt = document.getElementById("prompt").value;
+    const output = document.getElementById("output");
+    const btn = document.getElementById("generateBtn");
+    const btnText = btn.querySelector(".btn-text");
+    const btnLoader = btn.querySelector(".btn-loader");
+
+    if (!prompt.trim()) {
+        output.innerText = "Please enter a prompt first.";
+        output.classList.add("error");
+        setTimeout(() => output.classList.remove("error"), 2000);
+        return;
+    }
+
+    // Show loading state
+    btnText.style.display = "none";
+    btnLoader.style.display = "inline";
+    btn.disabled = true;
+    output.innerText = "Generating your text...";
+    output.classList.add("loading");
+
+    try {
+        const response = await fetch("/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt: prompt })
+        });
+        const data = await response.json();
+        output.classList.remove("loading");
+        output.innerText = data.result;
+    } catch (err) {
+        output.classList.remove("loading");
+        output.innerText = "Error: Could not connect to server.";
+        output.classList.add("error");
+    } finally {
+        btnText.style.display = "inline";
+        btnLoader.style.display = "none";
+        btn.disabled = false;
+    }
+}
+</script>
+
+</body>
+</html>

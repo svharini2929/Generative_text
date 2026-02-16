@@ -1,0 +1,238 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0a1a1a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #e0e0e0;
+    overflow: hidden;
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Animated background glows */
+.glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.4;
+    animation: float 8s ease-in-out infinite;
+}
+
+.glow-1 {
+    width: 400px;
+    height: 400px;
+    background: #00b894;
+    top: -100px;
+    left: -100px;
+}
+
+.glow-2 {
+    width: 350px;
+    height: 350px;
+    background: #00cec9;
+    bottom: -100px;
+    right: -100px;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, 20px); }
+}
+
+.container {
+    width: 680px;
+    background: rgba(10, 30, 30, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 206, 201, 0.2);
+    border-radius: 24px;
+    padding: 40px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    display: inline-block;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    border-radius: 16px;
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    line-height: 56px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 20px rgba(0, 184, 148, 0.4);
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #dfe6e9, #ffffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    color: #81c8c4;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+/* Input Section */
+.input-section {
+    margin-bottom: 20px;
+}
+
+.input-section label,
+.output-section label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #81c8c4;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+textarea {
+    width: 100%;
+    height: 130px;
+    background: rgba(5, 20, 20, 0.8);
+    border: 1px solid rgba(0, 206, 201, 0.25);
+    color: #e0e0e0;
+    padding: 16px;
+    border-radius: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    resize: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #00cec9;
+    box-shadow: 0 0 20px rgba(0, 206, 201, 0.15);
+}
+
+textarea::placeholder {
+    color: #3d7a78;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    border: none;
+    color: white;
+    border-radius: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 20px rgba(0, 184, 148, 0.3);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 184, 148, 0.4);
+    background: linear-gradient(135deg, #00d2a4, #00e0db);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-loader {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Output Section */
+.output-section {
+    margin-bottom: 20px;
+}
+
+#output {
+    background: rgba(5, 20, 20, 0.8);
+    border: 1px solid rgba(0, 206, 201, 0.2);
+    padding: 20px;
+    border-radius: 14px;
+    min-height: 120px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #d0e8e6;
+    transition: all 0.3s;
+}
+
+#output.loading {
+    color: #00cec9;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+#output.error {
+    color: #ff6b6b;
+    border-color: rgba(255, 107, 107, 0.3);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 206, 201, 0.15);
+}
+
+.footer span {
+    font-size: 0.75rem;
+    color: #3d7a78;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+    .container {
+        width: 95%;
+        padding: 24px;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+}
